@@ -39,8 +39,13 @@ const cartReducer = (state, action) => {
     const existingCartItemIndex = state.items.findIndex(
       (item) => item.id === action.id
     );
+
     //We just remove items of existing items
-    const existingCartItem = state.item[existingCartItemIndex];
+    const existingCartItem = state.items[existingCartItemIndex];
+    console.log(
+      "Existing Cart Item to be removed",
+      existingCartItem[existingCartItemIndex]
+    );
     const updatedItems = [...state.items];
 
     //If there is only one quantity, we will remove the item from the cart
