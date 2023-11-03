@@ -6,10 +6,16 @@ const Modal = ({ children, open, className }) => {
   const dialog = useRef();
 
   useEffect(() => {
+    //Recommended to lock in the value in this ref when this effects function runs.
+    const modal = dialog.current;
+
+    //Open the dialog programmatically
     if (open) {
-      //Open the dialog programmatically
-      dialog.current.showModal();
+      modal.showModal();
     }
+
+    //Cleanup function to be able to close the modal
+    return () => modal.close();
   }, [open]);
 
   return createPortal(
