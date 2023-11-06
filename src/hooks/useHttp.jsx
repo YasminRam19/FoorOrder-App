@@ -16,12 +16,16 @@ const useHttp = (url, config, initialData) => {
   const [isLoading, setIsLoading] = useState(false);
   const [data, setData] = useState(initialData);
 
+  const clearData = () => {
+    setData(initialData);
+  };
+
   //We wrap it inside useCallback -> will only be recreated when its dependency changes
   const sendRequest = useCallback(
-    async function sendRequest() {
+    async function sendRequest(data) {
       try {
         setIsLoading(true);
-        const resData = await sendHttpRequest(url, config);
+        const resData = await sendHttpRequest(url, { ...config, body: data });
         setData(resData);
       } catch (error) {
         setError(error.message || "Something wen wrong");
@@ -43,6 +47,7 @@ const useHttp = (url, config, initialData) => {
     isLoading,
     error,
     sendRequest,
+    clearData,
   };
 };
 
