@@ -19,7 +19,10 @@ const Checkout = () => {
   };
 
   return (
-    <Modal open={userProgressCtxt.progress === "checkout"}>
+    <Modal
+      open={userProgressCtxt.progress === "checkout"}
+      onClose={handleClose}
+    >
       <form>
         <h2>Title</h2>
         <p>Total Amount: {currencyFormatted.format(totalAmount)}</p>
